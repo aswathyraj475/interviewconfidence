@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Registration Form</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<!-- MATERIAL DESIGN ICONIC FONT -->
+		<link rel="stylesheet" href="{% static 'nmr/fonts/material-design-iconic-font/css/material-design-iconic-font.min.css' %}">
+
+		<!-- STYLE CSS -->
+		<link rel="stylesheet" href="{% static 'nmr/css/style.css' %}">
+	</head>
+
+	<body>
+
+		<div class="wrapper">
+			<div class="image-holder">
+				<img src="{% static 'nmr/images/registration-form-8.jpg' %}" alt="">
+			</div>
+			<div class="form-inner">
+				<form action="{% url 'Registration_save' %}" method="post">
+					{% csrf_token %}
+					<div class="form-header">
+						<h3>Sign up</h3>
+						<img src="{% static 'nmr/images/sign-up.png' %}" alt="" class="sign-up-icon">
+					</div>
+					<div class="form-group">
+						<label >Username:</label>
+						<input type="text" class="form-control" name="uname" data-validation="length alphanumeric" data-validation-length="3-12">
+					</div>
+					<div class="form-group">
+						<label>E-mail:</label>
+						<input type="text" class="form-control" name="email" data-validation="email">
+					</div>
+					<div class="form-group" >
+						<label>Password:</label>
+						<input type="password" class="form-control" name="password" data-validation="length" data-validation-length="min8">
+					</div>
+					<button>create my account</button>
+					<div class="socials">
+						<a href="{% url 'Login_Pg' %}"><p>Sign In</p></a>
+
+					</div>
+				</form>
+			</div>
+
+		</div>
+
+		<script src="{% static 'nmr/js/jquery-3.3.1.min.js' %}"></script>
+		<script src="{% static 'nmr/js/jquery.form-validator.min.js' %}"></script>
+		<script src="{% static 'nmr/js/main.js' %}"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+ {% if messages %}
+        {% for i in messages %}
+            {% if i.tags == 'warning' %}
+                <script>
+                    swal('{{i}}','', 'warning');
+                </script>
+            {% elif i.tags == 'error' %}
+                <script>
+                    swal('{{i}}','', 'error');
+                </script>
+            {% else %}
+                <script>
+                    swal('{{i}}','', 'success');
+                </script>
+            {% endif %}
+
+        {% endfor %}
+    {% endif %}
+	</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>
